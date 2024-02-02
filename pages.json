@@ -1,0 +1,33 @@
+{
+  "/" : {
+    "template_file" : "front.php",
+    "view_title" : "Frontpage",
+    "styles_enqueue" : [
+      "common.css"
+    ],
+    "script_enqueue" : [
+      "https://unpkg.com/htmx.org@1.9.10|external",
+      "common.js|footer"
+    ],
+    "language" : "en",
+    "meta" : [
+      {
+        "charset" : "UTF-8"
+      },
+      {
+        "name" : "viewport",
+        "content" : "width=device-width, initial-scale=1.0"
+      },
+      {
+        "name" : "description",
+        "content" : "Front page of this website"
+      },
+      {
+        "name" : "robots",
+        "content" : "index, follow"
+      }
+    ],
+    "favicon" : "",
+    "apple_touch_icon" : ""
+  }
+}
