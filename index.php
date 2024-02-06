@@ -44,6 +44,8 @@ View::initialize(Route::get_current_route());
 <head>
   <?php 
     echo View::get_view_title();
+    echo View::get_view_favicon();
+    echo View::get_view_apple_touch_icon();
     echo View::get_view_metadata();
     echo View::get_styles_enqueued();
     echo View::get_header_script_enqueued(); 

@@ -9,6 +9,8 @@ class View {
   private static $view_title = 'Document';
   private static $view_language = 'en';
   private static $view_metadata = '';
+  private static $view_favicon = '';
+  private static $view_apple_touch_icon = '';
   private static $route_valid = true;
 
   /**
@@ -32,7 +34,31 @@ class View {
   }
 
   /**
-   * Setup the page description
+   * Setup the page favicon
+   */
+  private function set_view_favicon($current_route, $pages_json_instance) {
+
+    if (self::$route_valid and isset($pages_json_instance[$current_route]['favicon'])) {
+
+      $favicon = $pages_json_instance[$current_route]['favicon'];
+      self::$view_favicon .= '<link rel="icon" type="image/x-icon" href="'. CONFIG['site_url'] .'/public/images/'. $favicon .'">';
+    }
+  }
+
+  /**
+   * Setup the page apple touch icon
+   */
+  private function set_view_apple_touch_icon($current_route, $pages_json_instance) {
+
+    if (self::$route_valid and isset($pages_json_instance[$current_route]['apple_touch_icon'])) {
+
+      $apple_touch_icon = $pages_json_instance[$current_route]['apple_touch_icon'];
+      self::$view_apple_touch_icon .= '<link rel="apple-touch-icon" sizes="180x180" href="'. CONFIG['site_url'] .'/public/images/'. $apple_touch_icon .'">';
+    }
+  }
+
+  /**
+   * Setup the page metadata
    */
   private function set_view_metadata($current_route, $pages_json_instance) {
 
@@ -142,6 +168,8 @@ class View {
     $self_instance->set_view_title($current_route, $pages_json_instance);
     $self_instance->set_view_language($current_route, $pages_json_instance);
     $self_instance->set_view_metadata($current_route, $pages_json_instance);
+    $self_instance->set_view_favicon($current_route, $pages_json_instance);
+    $self_instance->set_view_apple_touch_icon($current_route, $pages_json_instance);
     $self_instance->set_styles_enqueue($current_route, $pages_json_instance);
     $self_instance->set_header_script_enqueue($current_route, $pages_json_instance);
     $self_instance->set_footer_script_enqueue($current_route, $pages_json_instance);
@@ -166,6 +194,20 @@ class View {
    */
   public static function get_view_metadata() {
     return self::$view_metadata;
+  }
+
+  /**
+   * Returns the page favicon
+   */
+  public static function get_view_favicon() {
+    return self::$view_favicon;
+  }
+
+  /**
+   * Returns the page apple touch icon
+   */
+  public static function get_view_apple_touch_icon() {
+    return self::$view_apple_touch_icon;
   }
 
   /**
