@@ -13,6 +13,10 @@ Basic configuration is done in config.json. You can add your own then it is acce
 }
 ```
 
+### Ready made constants
+* ROOT_DIR - returns the root directory of site
+* PUBLIC_URI - returns the absolute url of the public directory
+
 ## Features
 ### View Generator
 To generate a view, create the template file in the templates folder then configure in pages.json file.
