@@ -5,10 +5,11 @@ Generates a view as configured in a json file
 ### View Generator
 To generate a view, create the template file in the templates folder then configure in pages.json file.
 To configure pages.json, define the route as the property then fill in the values.
-Importan note: The defined route is expected to have a slash. 
-Example: 
-This is correct  "/this-route"
+Importan note: The defined route is expected to have a slash. <br>
+Example: <br>
+This is correct  "/this-route" <br>
 This is wrong  "this-route"
+
 
 ```json
 {
