@@ -1,0 +1,9 @@
+Options Multiviews
+
+RewriteEngine On
+
+#Directory exception for redirection - /public/, /app/
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_URI} !^/app/
+
+RewriteRule ^(.*)$ index.php [L,QSA]

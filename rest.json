@@ -1,0 +1,6 @@
+{
+  "/test-route" : {
+    "method" : "GET",
+    "callback_file" : "test_route.php"
+  }
+}
