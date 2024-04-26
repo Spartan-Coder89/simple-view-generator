@@ -1,5 +1,5 @@
 # simple-view-generator
-Generates a view as configured in a json file
+A php application to generate pages to create a php website.
 
 ## Basic configuration
 Basic configuration is done in config.json. You can add your own then it is accessable sitewide with the CONFIG array constant. <br>
@@ -19,7 +19,7 @@ Basic configuration is done in config.json. You can add your own then it is acce
 
 ## Features
 ### View Generator
-To generate a view, create the template file in the templates folder then configure in pages.json file.
+To generate a view, create your html php template file in the templates folder then configure in pages.json file.
 To configure pages.json, define the route as the property then fill in the values. <br>
 **Importan note:** The defined route is expected to have a slash. <br>
 **Example:** <br>
