@@ -127,7 +127,7 @@ To define if a page needs a session, just add the page route in the session requ
 ### Security
 For XSS <br>
 - You can generate a token and verify using <br>
-```PHP
+```php
 Auth::generate_nonce()
 Auth::verify_nonce( 'Token goes here' )
 ```
