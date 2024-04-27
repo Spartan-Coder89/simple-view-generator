@@ -13,9 +13,13 @@ Basic configuration is done in config.json. You can add your own then it is acce
 }
 ```
 
-### Ready made constants
+### Ready made global constants
 * ROOT_DIR - returns the root directory of site
 * PUBLIC_URI - returns the absolute url of the public directory
+
+### Ready made global functions
+* get_site_url() - returns the site url
+* get_partial_template( 'partial.php' ) - to include a partial into a template. Needs only the partial file name created in templates/partials. **Should include the file extension.**
 
 ## Features
 ### View Generator
