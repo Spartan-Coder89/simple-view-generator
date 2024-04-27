@@ -54,7 +54,7 @@ View::initialize(Route::get_current_route());
     echo View::get_header_script_enqueued(); 
   ?>
 </head>
-<body>
+<body <?php echo !empty(View::get_view_id()) ? 'id="'. View::get_view_id() .'"': ''; ?>>
   <?php 
     View::get_view();
     echo View::get_footer_script_enqueued();

@@ -1,5 +1,5 @@
 {
-  "site_url" : "https://yoursiteurl.com",
-  "public_uri" : "https://yoursiteurl/public",
+  "site_url" : "https://yoursite.com",
+  "public_uri" : "https://yoursite.com/public",
   "session_requirement" : []
 }

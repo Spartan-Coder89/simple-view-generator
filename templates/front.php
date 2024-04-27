@@ -1,8 +1,18 @@
-<?php
-
-get_partial_template('sidebar.php');
-echo '<br>';
-get_partial_template('header.php');
-echo '<br>';
-echo 'This is frontpage template';
-echo '<br>';
+<div id="wrap">
+  <div class="viewbox">
+    <div class="video_wrap">
+      <video autoplay playsinline></video>
+    </div>
+    <div class="actions">
+      <button type="button" id="create_call">Create Call</button>
+    </div>
+  </div>
+  <div class="viewbox">
+    <div class="video_wrap">
+      <video autoplay playsinline></video>
+    </div>
+    <div class="actions">
+      <button type="button" id="recieve_call">Recieve Call</button>
+    </div>
+  </div>
+</div>

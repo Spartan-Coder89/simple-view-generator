@@ -2,6 +2,7 @@
   "/" : {
     "template_file" : "front.php",
     "view_title" : "Frontpage",
+    "page_id" : "front",
     "styles_enqueue" : [
       "common.css"
     ],
@@ -32,6 +33,7 @@
   "/login" : {
     "template_file" : "login.php",
     "view_title" : "Login",
+    "page_id" : "login",
     "styles_enqueue" : [
       "common.css"
     ],

@@ -9,6 +9,7 @@ class View {
   private static $view_title = 'Document';
   private static $view_language = 'en';
   private static $view_metadata = '';
+  private static $view_id = '';
   private static $view_favicon = '';
   private static $view_apple_touch_icon = '';
   private static $route_valid = true;
@@ -78,6 +79,16 @@ class View {
   }
 
   /**
+   * Setup the page id
+   */  
+  private static function set_view_id($current_route, $pages_json_instance) {
+
+    if (self::$route_valid and isset($pages_json_instance[$current_route]['page_id'])) {
+      self::$view_id = $pages_json_instance[$current_route]['page_id'];
+    }
+  }
+
+  /**
    * Setup the styles to be enqueued
    */
   private function set_styles_enqueue($current_route, $pages_json_instance) {
@@ -96,22 +107,27 @@ class View {
    */
   private function set_header_script_enqueue($current_route, $pages_json_instance) {
 
-    if (self::$route_valid and isset($pages_json_instance[$current_route]['script_enqueue'])) {
+    if (self::$route_valid and 
+        isset($pages_json_instance[$current_route]['script_enqueue']) and 
+        !empty($pages_json_instance[$current_route]['script_enqueue'])) {
 
       $script_enqueue = $pages_json_instance[$current_route]['script_enqueue'];
 
       foreach ($script_enqueue as $key => $script_src) {
 
         if (strpos($script_src, '|') == false) {
-          self::$header_scripts = self::$header_scripts .'<script src="'. PUBLIC_URI .'/js/'. $script_src .'"></script>';
+
+          $defer = strpos($script_src, 'defer') !== false ? 'defer' : '';
+          self::$header_scripts = self::$header_scripts .'<script '. $defer .' src="'. PUBLIC_URI .'/js/'. $script_src .'"></script>';
         }
 
         if (strpos($script_src, '|') !== false and 
             strpos($script_src, 'external') !== false and 
             strpos($script_src, 'footer') == false) {
           
+          $defer = strpos($script_src, 'defer') !== false ? 'defer' : '';
           $script_src = substr($script_src, 0, strpos($script_src, '|'));
-          self::$header_scripts = self::$header_scripts .'<script src="'. $script_src .'"></script>';
+          self::$header_scripts = self::$header_scripts .'<script '. $defer .' src="'. $script_src .'"></script>';
         }
       }
     }
@@ -122,7 +138,9 @@ class View {
    */
   private function set_footer_script_enqueue($current_route, $pages_json_instance) {
 
-    if (self::$route_valid and isset($pages_json_instance[$current_route]['script_enqueue'])) {
+    if (self::$route_valid and 
+        isset($pages_json_instance[$current_route]['script_enqueue']) and 
+        !empty($pages_json_instance[$current_route]['script_enqueue'])) {
 
       $script_enqueue = $pages_json_instance[$current_route]['script_enqueue'];
 
@@ -131,17 +149,19 @@ class View {
         if (strpos($script_src, '|') !== false and 
             strpos($script_src, 'footer') !== false and 
             strpos($script_src, 'external') == false) {
-
+          
+          $defer = strpos($script_src, 'defer') !== false ? 'defer' : '';
           $script_src = substr($script_src, 0, strpos($script_src, '|'));
-          self::$footer_scripts = self::$footer_scripts .'<script src="'. PUBLIC_URI .'/js/'. $script_src .'"></script>';
+          self::$footer_scripts = self::$footer_scripts .'<script '. $defer .' src="'. PUBLIC_URI .'/js/'. $script_src .'"></script>';
         }
 
         if (strpos($script_src, '|') !== false and 
             strpos($script_src, 'footer') !== false and 
             strpos($script_src, 'external') !== false) {
 
+          $defer = strpos($script_src, 'defer') !== false ? 'defer' : '';
           $script_src = substr($script_src, 0, strpos($script_src, '|'));
-          self::$footer_scripts = self::$footer_scripts .'<script src="'. $script_src .'"></script>';
+          self::$footer_scripts = self::$footer_scripts .'<script '. $defer .' src="'. $script_src .'"></script>';
         }
       }
     }
@@ -161,6 +181,7 @@ class View {
 
     self::$current_route = $current_route;
     $pages_json_instance = json_decode(file_get_contents(ROOT_DIR .'/pages.json'), true);
+    
     $self_instance = new self;
 
     self::$route_valid = $self_instance->check_route_validity($current_route, $pages_json_instance);
@@ -170,6 +191,7 @@ class View {
     $self_instance->set_view_metadata($current_route, $pages_json_instance);
     $self_instance->set_view_favicon($current_route, $pages_json_instance);
     $self_instance->set_view_apple_touch_icon($current_route, $pages_json_instance);
+    $self_instance->set_view_id($current_route, $pages_json_instance);
     $self_instance->set_styles_enqueue($current_route, $pages_json_instance);
     $self_instance->set_header_script_enqueue($current_route, $pages_json_instance);
     $self_instance->set_footer_script_enqueue($current_route, $pages_json_instance);
@@ -208,6 +230,13 @@ class View {
    */
   public static function get_view_apple_touch_icon() {
     return self::$view_apple_touch_icon;
+  }
+
+  /**
+   * Returns the view id
+   */
+  public static function get_view_id() {
+    return self::$view_id;
   }
 
   /**
